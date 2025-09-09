@@ -1,20 +1,29 @@
 Video Interview Proctoring System
 
-This is a comprehensive video proctoring system for online interviews, developed as an SDE internship assignment for Tutedude. The application uses real-time computer vision to monitor a candidate's focus and detect suspicious objects during an interview session.
+A comprehensive video proctoring system designed for online interviews, developed as part of an SDE internship assignment for Tutodude. This application leverages real-time computer vision to monitor candidate focus and detect suspicious objects during interview sessions.
+
+Live Application Links:
+
+Frontend & Full Application: https://videoproctoringsystem.vercel.app/
+
+Backend API: https://videoproctoringbackend.onrender.com
 
 Features
-Real-time Focus Detection: Monitors if the candidate is looking at the screen.
 
-Face Detection: Detects the presence/absence of a face and flags multiple faces in the frame.
+Real-time Focus Detection: Monitors if the candidate is attentive and looking at the screen.
 
-Object Detection: Identifies suspicious items such as mobile phones, books, and other electronic devices.
+Face Detection: Detects presence/absence of a face and flags multiple faces in the frame.
 
-Integrity Scoring: Calculates a final integrity score based on deductions for suspicious events.
+Object Detection: Identifies suspicious items such as mobile phones, books, and other unauthorized devices.
 
-Detailed Reports: Generates a final proctoring report with a summary of the session and all logged events.
+Integrity Scoring: Computes a final integrity score based on deductions for detected suspicious events.
+
+Detailed Reports: Generates comprehensive proctoring reports summarizing the session and logged events.
 
 Tech Stack
+
 Frontend
+
 React 18 with Vite
 
 TensorFlow.js for object detection
@@ -24,55 +33,63 @@ MediaPipe for face mesh detection
 React Webcam for camera access
 
 Backend
+
 Node.js with Express
 
 MongoDB with Mongoose
 
 Installation
 Prerequisites
-Node.js (version 16 or higher)
+
+Node.js (v16 or higher)
 
 npm (Node Package Manager)
 
-MongoDB (local or cloud instance like MongoDB Atlas)
+MongoDB (local or cloud, e.g., MongoDB Atlas)
 
 A modern web browser with camera access
 
 1. Backend Setup
-Navigate to the backend directory and install the dependencies:
-
 cd backend
 npm install
+
 
 Create a .env file in the backend directory and add your MongoDB connection URI:
 
 MONGODB_URI='your-mongodb-connection-string'
+
 
 Start the backend server:
 
 npm run dev
 
 2. Frontend Setup
-Open a new terminal, navigate to the frontend directory, and install the dependencies:
-
 cd frontend
 npm install
-
-Start the frontend development server:
-
 npm run dev
 
 Usage
-Start Interview: Go to http://localhost:3000 in your browser. Enter the candidate's name and click "Start Interview". The application will request access to your camera.
 
-Monitor: The system will begin real-time monitoring. The Detection Status panel will update with information about focus, objects, and an event log.
+Start Interview:
+Visit http://localhost:3000
+ or the live frontend link. Enter the candidate’s name and click Start Interview. Allow camera access when prompted.
 
-End Session: Click "End Interview" to stop the session. The final report will be displayed.
+Monitor Session:
+The system provides real-time monitoring. The Detection Status panel updates with focus status, detected objects, and an event log.
 
-View Reports: Navigate to the "View Reports" section to see the final proctoring report, including the integrity score and event summary.
+End Session:
+Click End Interview to conclude the session. A final proctoring report with an integrity score and event summary is displayed.
 
+View Reports:
+Access previously completed sessions via the View Reports section to review integrity scores and detailed logs.
+
+API Endpoints
+HTTP Method	Endpoint	Description
+POST	/api/sessions	Create a new session
+POST	/api/sessions/:id/events	Log a detection event
+PUT	/api/sessions/:id/end	End a session
+GET	/api/sessions/:id	Retrieve final report
 Evaluation Criteria
-The project is evaluated based on the following criteria:
 
 Functionality: 35%
 
@@ -80,40 +97,6 @@ Code Quality & Documentation: 20%
 
 UI/UX Simplicity: 15%
 
-Accuracy (Focus + Object Detect): 20%
+Detection Accuracy (Focus + Object): 20%
 
-Bonus Points (Eye closure detection, Real-time alerts): 10%
-
-API Endpoints
-HTTP Method
-
-Endpoint
-
-Description
-
-POST
-
-/api/sessions
-
-Creates a new session
-
-POST
-
-/api/sessions/:id/events
-
-Logs a detection event
-
-PUT
-
-/api/sessions/:id/end
-
-Ends a session
-
-GET
-
-/api/sessions/:id
-
-Gets the final report
-
-License
-This project is licensed under the MIT License.
+Bonus: Eye closure detection, real-time alerts: 10%
