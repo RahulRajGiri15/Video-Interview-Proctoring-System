@@ -1,22 +1,6 @@
 import axios from 'axios';
 
-
-
-const inferFallbackBase = () => {
-  if (typeof window !== 'undefined') {
-    const isLocal = /localhost|127\.0\.0\.1/.test(window.location.hostname)
-    if (!isLocal) {
-      return 'https://videoproctoringbackend.onrender.com/api'
-    }
-  }
-  return '/api'
-}
-
-const API_BASE = import.meta.env.VITE_API_BASE_URL || inferFallbackBase();
-
-// Ensure no trailing slash before appending paths
-const normalizeBase = (base) => base.endsWith('/') ? base.slice(0, -1) : base;
-const API_URL = `${normalizeBase(API_BASE)}/sessions`;
+const API_URL = '/api/sessions';
 
 export const apiService = {
   // Create a new session on the backend
@@ -30,7 +14,7 @@ export const apiService = {
     try {
       await axios.post(`${API_URL}/${sessionId}/events`, eventData);
     } catch (error) {
-      console.error('Error logging event:', error?.response?.data || error?.message || error);
+      console.error('Error logging event:', error);
     }
   },
 
