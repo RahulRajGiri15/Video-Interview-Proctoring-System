@@ -1,6 +1,14 @@
 import axios from 'axios';
 
-const API_URL = '/api/sessions';
+// const API_URL = '/api/sessions';
+
+// Dynamically set API base URL
+const API_BASE =
+  import.meta.env.MODE === 'development'
+    ? '/api' // Dev → will be proxied to localhost:5000 via vite.config.js
+    : import.meta.env.VITE_API_BASE; // Prod → from .env.production
+
+const API_URL = `${API_BASE}/sessions`;
 
 export const apiService = {
   // Create a new session on the backend
