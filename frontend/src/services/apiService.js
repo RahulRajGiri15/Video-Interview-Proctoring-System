@@ -2,7 +2,11 @@ import axios from 'axios';
 
 
 
-const API_URL = '/api/sessions';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
+
+// Ensure no trailing slash before appending paths
+const normalizeBase = (base) => base.endsWith('/') ? base.slice(0, -1) : base;
+const API_URL = `${normalizeBase(API_BASE)}/sessions`;
 
 export const apiService = {
   // Create a new session on the backend
@@ -16,7 +20,7 @@ export const apiService = {
     try {
       await axios.post(`${API_URL}/${sessionId}/events`, eventData);
     } catch (error) {
-      console.error('Error logging event:', error);
+      console.error('Error logging event:', error?.response?.data || error?.message || error);
     }
   },
 
