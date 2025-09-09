@@ -2,7 +2,17 @@ import axios from 'axios';
 
 
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
+const inferFallbackBase = () => {
+  if (typeof window !== 'undefined') {
+    const isLocal = /localhost|127\.0\.0\.1/.test(window.location.hostname)
+    if (!isLocal) {
+      return 'https://videoproctoringbackend.onrender.com/api'
+    }
+  }
+  return '/api'
+}
+
+const API_BASE = import.meta.env.VITE_API_BASE_URL || inferFallbackBase();
 
 // Ensure no trailing slash before appending paths
 const normalizeBase = (base) => base.endsWith('/') ? base.slice(0, -1) : base;

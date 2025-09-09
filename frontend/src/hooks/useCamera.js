@@ -38,9 +38,26 @@ export const useCamera = () => {
   const startRecording = () => {
     if (!stream) return
     try {
-      const mediaRecorder = new MediaRecorder(stream, {
-        mimeType: 'video/webm; codecs=vp9'
-      })
+      const preferredTypes = [
+        'video/webm;codecs=vp9',
+        'video/webm;codecs=vp8',
+        'video/webm',
+        ''
+      ]
+
+      let options = undefined
+      for (const type of preferredTypes) {
+        if (!type) {
+          options = undefined
+          break
+        }
+        if (window.MediaRecorder && MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(type)) {
+          options = { mimeType: type }
+          break
+        }
+      }
+
+      const mediaRecorder = new MediaRecorder(stream, options)
       mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
           recordedChunks.current.push(event.data)

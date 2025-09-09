@@ -42,14 +42,16 @@ const Dashboard = ({ onSessionComplete }) => {
       return
     }
     try {
-      await startCamera()
-      await startRecording()
+      // Step 1: Create backend session first
       const session = await apiService.createSession({
         candidateName: candidateName.trim(),
         startTime: new Date().toISOString()
       })
       setSessionId(session.id)
       setSessionStartTime(new Date())
+      // Step 2: Start camera/recording
+      await startCamera()
+      await startRecording()
       setIsSessionActive(true)
       setEvents([])
       // Start detection loops
@@ -58,8 +60,9 @@ const Dashboard = ({ onSessionComplete }) => {
         processObjectDetection()
       }, 1000)
     } catch (error) {
-      console.error('Error starting session:', error)
-      alert('Failed to start session')
+      console.error('Error starting session:', error?.response?.data || error?.message || error)
+      const message = error?.response?.data?.error || error?.message || 'Unknown error'
+      alert(`Failed to start session: ${message}`)
     }
   }
 
