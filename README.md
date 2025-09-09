@@ -1,102 +1,146 @@
-Video Interview Proctoring System
+# Video Interview Proctoring System
 
-A comprehensive video proctoring system designed for online interviews, developed as part of an SDE internship assignment for Tutodude. This application leverages real-time computer vision to monitor candidate focus and detect suspicious objects during interview sessions.
+**Live Link :** [https://videoproctoringsystem.vercel.app/](https://videoproctoringsystem.vercel.app/)
 
-Live Application Links:
+**Frontend :** [https://videoproctoringsystem.vercel.app/](https://videoproctoringsystem.vercel.app/)
+**Backend API :** [https://videoproctoringbackend.onrender.com](https://videoproctoringbackend.onrender.com)
 
-Frontend & Full Application: https://videoproctoringsystem.vercel.app/
+---
 
-Backend API: https://videoproctoringbackend.onrender.com
+## Overview
 
-Features
+This project is a comprehensive **video interview proctoring system**. It leverages **real-time computer vision** to monitor candidate focus and detect suspicious objects during online interviews. The system also generates detailed reports with an integrity score to evaluate the authenticity of interview sessions.
 
-Real-time Focus Detection: Monitors if the candidate is attentive and looking at the screen.
+---
 
-Face Detection: Detects presence/absence of a face and flags multiple faces in the frame.
+## Why Use a Video Proctoring System?
 
-Object Detection: Identifies suspicious items such as mobile phones, books, and other unauthorized devices.
+A video proctoring system enhances the reliability and integrity of online interviews by:
 
-Integrity Scoring: Computes a final integrity score based on deductions for detected suspicious events.
+* **Ensuring candidate focus:** Detects if candidates are attentive during interviews.
+* **Detecting unauthorized behavior:** Flags multiple faces, suspicious objects, or prohibited devices in real time.
+* **Maintaining interview integrity:** Generates detailed reports for evaluation.
+* **Providing real-time alerts:** Optionally notifies if suspicious events occur during the session.
 
-Detailed Reports: Generates comprehensive proctoring reports summarizing the session and logged events.
+This project demonstrates the integration of **modern web technologies** and **real-time computer vision** for a secure and interactive online interview experience.
 
-Tech Stack
+---
 
-Frontend
+## Features
 
-React 18 with Vite
+* **Real-time Focus Detection:** Monitors candidate attention using face and eye tracking.
+* **Face Detection:** Identifies presence/absence of faces and flags multiple faces in the frame.
+* **Object Detection:** Detects unauthorized items such as phones, books, or electronic devices using TensorFlow\.js.
+* **Integrity Scoring:** Computes a final score based on logged suspicious events.
+* **Detailed Reports:** Generates session summaries including all events and the overall integrity score.
+* **Tech Stack:** MERN (MongoDB, Express, React, Node.js), TensorFlow\.js, MediaPipe, React Webcam
 
-TensorFlow.js for object detection
+---
 
-MediaPipe for face mesh detection
+## Prerequisites
 
-React Webcam for camera access
+* Node.js (v16 or higher recommended)
+* npm (v8 or higher recommended)
+* MongoDB instance (local or MongoDB Atlas)
+* Modern web browser with camera access
 
-Backend
+---
 
-Node.js with Express
+## Getting Started
 
-MongoDB with Mongoose
+### 1. Clone the Repository
 
-Installation
-Prerequisites
+```
+git clone https://github.com/your-username/video-proctoring-system.git
+cd video-proctoring-system
+```
 
-Node.js (v16 or higher)
+### 2. Install Dependencies
 
-npm (Node Package Manager)
+**Backend:**
 
-MongoDB (local or cloud, e.g., MongoDB Atlas)
-
-A modern web browser with camera access
-
-1. Backend Setup
+```
 cd backend
 npm install
+```
 
+**Frontend:**
 
-Create a .env file in the backend directory and add your MongoDB connection URI:
-
-MONGODB_URI='your-mongodb-connection-string'
-
-
-Start the backend server:
-
-npm run dev
-
-2. Frontend Setup
+```
 cd frontend
 npm install
+```
+
+### 3. Environment Variables
+
+Create a `.env` file in the backend directory and add your MongoDB connection URI:
+
+```
+MONGODB_URI=your-mongodb-connection-string
+```
+
+### 4. Start Development Servers
+
+**Backend:**
+
+```
 npm run dev
+```
 
-Usage
+**Frontend:**
 
-Start Interview:
-Visit http://localhost:3000
- or the live frontend link. Enter the candidate’s name and click Start Interview. Allow camera access when prompted.
+```
+cd frontend
+npm run dev
+```
 
-Monitor Session:
-The system provides real-time monitoring. The Detection Status panel updates with focus status, detected objects, and an event log.
+The frontend will be available at [http://localhost:3000](http://localhost:3000) by default.
 
-End Session:
-Click End Interview to conclude the session. A final proctoring report with an integrity score and event summary is displayed.
+---
 
-View Reports:
-Access previously completed sessions via the View Reports section to review integrity scores and detailed logs.
+## Deployment
 
-API Endpoints
-HTTP Method	Endpoint	Description
-POST	/api/sessions	Create a new session
-POST	/api/sessions/:id/events	Log a detection event
-PUT	/api/sessions/:id/end	End a session
-GET	/api/sessions/:id	Retrieve final report
-Evaluation Criteria
+The application can be deployed on platforms such as **Vercel** (frontend) and **Render** (backend).
 
-Functionality: 35%
+**Frontend Deployment (Vercel):**
 
-Code Quality & Documentation: 20%
+* Push your frontend code to GitHub.
+* Create a new project on Vercel and link the repository.
+* Set environment variables if required.
+* Deploy to get a public URL: [https://videoproctoringsystem.vercel.app/](https://videoproctoringsystem.vercel.app/)
 
-UI/UX Simplicity: 15%
+**Backend Deployment (Render):**
 
-Detection Accuracy (Focus + Object): 20%
+* Push your backend code to GitHub.
+* Create a Web Service on Render and connect the repository.
+* Set build command:
 
-Bonus: Eye closure detection, real-time alerts: 10%
+```
+npm install
+```
+
+* Set start command:
+
+```
+npm start
+```
+
+* Add environment variable `MONGODB_URI`.
+* Deploy to get a public URL: [https://videoproctoringbackend.onrender.com](https://videoproctoringbackend.onrender.com)
+
+---
+
+## API Endpoints
+
+| Method | Endpoint                  | Description           |
+| ------ | ------------------------- | --------------------- |
+| POST   | /api/sessions             | Create a new session  |
+| POST   | /api/sessions/\:id/events | Log a detection event |
+| PUT    | /api/sessions/\:id/end    | End a session         |
+| GET    | /api/sessions/\:id        | Retrieve final report |
+
+---
+
+## License
+
+This project is licensed under the **MIT License**.
