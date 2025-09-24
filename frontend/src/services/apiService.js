@@ -2,6 +2,9 @@ import axios from 'axios';
 
 // const API_URL = '/api/sessions';
 
+
+//////////Here insted of hardcoding the API URL, we set it dynamically based on the environment//////////
+//// This allows us to use a proxy in development and a real URL in production
 // Dynamically set API base URL
 const API_BASE =
   import.meta.env.MODE === 'development'
@@ -15,7 +18,7 @@ export const apiService = {
   createSession: async (sessionData) => {
     const response = await axios.post(API_URL, sessionData);
     return response.data;
-  },
+  }, 
 
   // Log an event to the backend
   logEvent: async (sessionId, eventData) => {
